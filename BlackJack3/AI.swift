@@ -9,9 +9,7 @@
 import Foundation
 
 class AI:Player{
-    
-    init(){
-        //self.lost=false
-    }
 
-    if decks.
+
+    //generate_turn():
+}

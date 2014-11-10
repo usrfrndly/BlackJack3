@@ -11,16 +11,13 @@ import Foundation
 /**
 *  Represents a Dealer
 */
-class Dealer{
-    /// The dealer's hand of cards
-    var dealerHand:[Card]=[]
-    /// The sum of the dealer's cards
-    var dealerTotal:Int
+class Dealer:Player{
+ 
     /// The face down card
     var holeCard:Card? = nil
-    
+    var faceUpCard:Card? = nil
     init(){
-        self.dealerTotal = 0
+        
     }
     
     /**
@@ -30,29 +27,42 @@ class Dealer{
     */
     func addCard(card:Card){
         // The first card in the dealers hand is the holeCard, whose value is hidden
-        if dealerHand.isEmpty{
+        if hand.isEmpty{
             holeCard = card
         }else{
+            if hand.count == 1{
+                faceUpCard = card
+            }
             // Evaluate ace cards
             if(card.isAce()){
-                if dealerTotal >= 11 {
-                    card.makeSmallAce()
+                aces++
+            }
+            hand.append(card)
+            totaledHand+=card.value
+            // If previous ace was set to 11 and should be reset to 1
+            if totaledHand > 21 && aces>=1 && aces >= subtractAces{
+                var index:Int?
+                for i in 0..<len(hand){
+                    if hand[i].value==11{
+                        index = i
+                        break
+                    }
                 }
-                else {
-                    card.makeBigAce()
+
+                if index!=nil{
+                    hand[index].makeSmallAce()
+                    totaledHand-=10
+                    subtractAces++
                 }
             }
-            dealerTotal+=card.value
         }
-        dealerHand.append(card)
-        
     }
     
     
     func calculateHoleCard(){
         if holeCard != nil{
             if(holeCard!.isAce()){
-                if dealerTotal >= 11 {
+                if totaledHand >= 11 {
                     holeCard!.makeSmallAce()
                 }
                 else {
@@ -65,7 +75,7 @@ class Dealer{
     func hasBlackjack()->Bool{
         if holeCard != nil{
             calculateHoleCard()
-            if dealerTotal+holeCard!.value == 21{
+            if totaledHand+holeCard!.value == 21{
                 return true
             }else{
                 return false
@@ -78,25 +88,17 @@ class Dealer{
     func revealHoleCard() -> Card?{
         if holeCard != nil{
             calculateHoleCard()
-            dealerTotal+=holeCard!.value
+            totaledHand+=holeCard!.value
             return holeCard!
         }else{
             return holeCard
         }
     }
     
-    func calculateTotal() -> Int{
-        var total:Int=0
-        for card in dealerHand{
-            total+=card.value
-        }
-        return total
-    }
-    
     func clear(){
         holeCard = nil
-        dealerHand=[]
-        dealerTotal=0
+        hand=[]
+        totaledHand=0
     }
     
 }

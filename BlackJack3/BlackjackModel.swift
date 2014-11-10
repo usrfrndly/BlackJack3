@@ -27,7 +27,7 @@ class BlackjackModel{
         self.playerNumber = 2
     }
     
-    func playAgain(){
+    func play(){
         gameOverMessage = ""
         for player in players{
             player.clear()
@@ -43,24 +43,12 @@ class BlackjackModel{
         }
     }
     
-    func newGame(playerNum:Int=2, deckNum:Int=3) {
-        gameOverMessage = ""
-        if players.count != 0{
-            for player in players{
-                player.clear()
-            }
-        }
-        else{
-            players.append(HumanPlayer())
-            
-                players.append(AI())
-        }
-
- 
-        dealer.clear()
+    func newGame(deckNum:Int=3) {
+        players.append(Player())
+        players.append(AI())
         self.decks = Decks(numDecks: deckNum)
-
-        self.decks.deck=self.decks.shuffleDeck()
+        self.decks.deck = self.decks.shuffleDeck()
+        play()
     }
 
     
@@ -83,9 +71,9 @@ class BlackjackModel{
             decks.deck.append(card)
         }
         var dealerHasBlackjack = false
-        // dealer.dealerTotal does not include the value of the holeCard and right nowjust contains the value of the dealer's face up card
+        // dealer.totaledHand does not include the value of the holeCard and right nowjust contains the value of the dealer's face up card
         // Dealer checks if he has blackjack if second card has a value of 10 or 11
-        if dealer.dealerTotal >= 10{
+        if dealer.totaledHand >= 10{
             dealerHasBlackjack = dealer.hasBlackjack()
         }
         for player in players{
@@ -144,22 +132,97 @@ class BlackjackModel{
         player.addCard(card)
         decks.deck.append(card)
         //nothing happens immediately right?
-        if player.playerTotal > 21{
+        if player.totaledHand > 21{
             playerLose(player)
         }
         // Game automatically runs the dealer turn if player gets 21
-//        if player.playerTotal == 21{
+//        if player.totaledHand == 21{
 //            dealerTurn()
 //        }
     }
-    
+    func generateAITurn(){
+        var stay = false
+        var ai = players[1]
+        var numHits = 0 // TODO : why?
+        while !stay{
+            if decks.numberOfDecks >= 3{
+                if ai.isHardHand(){
+                    if ((ai.totaledHand < 12) || (ai.totaledHand == 12 && dealer.totaledHand < 4) || (ai.totaledHand == 12 && dealer.totaledHand > 6) || (ai.totaledHand < 17 && dealer.totaledHand > 6)){
+                        playerHit(ai)
+                        numHits++
+                        
+                    }
+                    else{
+                        stay = true
+                        ai.gameOverMess = "You hit \(numHits) times"
+                    }
+                }
+                else{ // ai soft hand
+                    if ((ai.totaledHand < 18) || (ai.totaledHand == 18 && dealer.totaledHand > 8)){
+                        playerHit(ai)
+                        numHits++
+                    }
+                    else{
+                        stay = true
+                        ai.gameOverMess = "You hit \(numHits) times"
+                    }
+                    
+                }
+            }
+            else if decks.numberOfDecks == 2{
+                if ai.isHardHand(){
+                    if ((ai.totaledHand < 12) || (ai.totaledHand == 12 && dealer.totaledHand < 4) || (ai.totaledHand < 17 && dealer.totaledHand > 6)){
+                        playerHit(ai)
+                        numHits++
+                    }
+                    else{
+                        stay = true
+                        ai.gameOverMess = "You hit \(numHits) times"
+                    }
+                }
+                else{ // soft hand
+                    if ((ai.totaledHand < 18) || (ai.totaledHand==18 && dealer.totaledHand > 8)){
+                        playerHit(ai)
+                        numHits++
+                    }
+                    else{
+                        stay = true
+                        ai.gameOverMess = "You hit \(numHits) times"
+                    }
+                }
+            }
+            else if decks.numberOfDecks == 1{
+                if ai.isHardHand(){
+                    if((ai.totaledHand < 12 ) || (ai.totaledHand == 12 && dealer.totaledHand < 4) || (ai.totaledHand < 17 && dealer.totaledHand > 6)){
+                        playerHit(ai)
+                        numHits++
+                    }
+                    else{
+                        stay = true
+                        ai.gameOverMess = "You hit \(numHits) times"
+                    }
+                }
+                else{ // soft hand
+                    if((ai.totaledHand < 18) ||  (ai.totaledHand == 18 && dealer.totaledHand == 9) || (ai.totaledHand == 18 && dealer.totaledHand == 10)){
+                        playerHit(ai)
+                        numHits++
+                    }
+                    else{
+                        stay = true
+                        ai.gameOverMess = "You hit \(numHits) times"
+                    }
+                }
+            }
+        } // ai stay
+        
+    }
     /**
     Dealer continues to hit as long as card total is less than 17
     */
     func dealerTurn(){
         var hiddenCard = dealer.revealHoleCard()
         // TODO: Hole card is revealed in gui
-        while dealer.dealerTotal < 17{
+        while dealer.totaledHand < 17{
             var card:Card = decks.deck.removeAtIndex(0)
             dealer.addCard(card)
             decks.deck.append(card)
@@ -167,16 +230,16 @@ class BlackjackModel{
         for player in players{
             // Check if player has already gotten blackjack or busted
             if player.gameOverMess.isEmpty{
-                if dealer.dealerTotal > 21 && player.playerTotal<=21{ // Dealer busts, player wins
+                if dealer.totaledHand > 21 && player.totaledHand<=21{ // Dealer busts, player wins
                     playerWin(player)
                 }
-                else if dealer.dealerTotal == player.playerTotal{ // Tie
+                else if dealer.totaledHand == player.totaledHand{ // Tie
                     push(player)
                 }
-                else if dealer.dealerTotal > player.playerTotal{ // Whoever has the greatest total under 21 wins
+                else if dealer.totaledHand > player.totaledHand{ // Whoever has the greatest total under 21 wins
                     playerLose(player)
                 }
-                else if dealer.dealerTotal < player.playerTotal{
+                else if dealer.totaledHand < player.totaledHand{
                     playerWin(player)
                 }
             

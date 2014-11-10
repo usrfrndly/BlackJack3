@@ -12,7 +12,12 @@ import Foundation
 *  Class representing the Blackjack player
 */
 class Player{
-
+    /// Player money
+    var funds:Double
+    
+    /// The player's bet this round
+    var playerBet:Double
+    
     /// An array of card objects
     var hand:[Card]
     /// Sum of the value of the cards in player's han
@@ -28,6 +33,8 @@ class Player{
         self.totaledHand = 0
         self.aces = 0
         self.subtractAces = 0
+        self.funds = 100.00
+        self.playerBet=1.0
         //self.lost=false
         self.gameOverMess=""
     }
@@ -52,14 +59,14 @@ class Player{
         // If previous ace was set to 11 and should be reset to 1
         if totaledHand > 21 && aces>=1 && aces >= subtractAces{
             var index:Int?
-            for i in 0..<len(hand){
+            for i in 0..<hand.count{
                 if hand[i].value==11{
                     index = i
                     break
                 }
             }
-            if index!=nil{
-                hand[index].makeSmallAce()
+            if index != nil{
+                hand[index!].makeSmallAce()
                 totaledHand-=10
                 subtractAces++
             }
@@ -74,7 +81,26 @@ class Player{
             return false
         }
     }
+    
+    func bet(amount:Double) -> Bool{
+        if amount > funds ||  amount < 1.0{
+            return false
+        }
+        else{
+            playerBet=amount
+            return true
+        }
+        
+    }
 
+    func isHardHand() -> Bool{
+        for card in hand{
+            if card.isAce() && card.value == 11{
+                return false
+            }
+        }
+        return true
+    }
     
     
     /**

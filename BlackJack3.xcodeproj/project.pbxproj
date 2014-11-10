@@ -22,7 +22,6 @@
 		1F8857A71A018E7F003747EF /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8857A61A018E7F003747EF /* Player.swift */; };
 		1F8857A91A018F0B003747EF /* CardImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F8857A81A018F0B003747EF /* CardImages.xcassets */; };
 		1F9DEFB51A021040007CAC1E /* AI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9DEFB41A021040007CAC1E /* AI.swift */; };
-		1F9DEFB71A0210F1007CAC1E /* HumanPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9DEFB61A0210F1007CAC1E /* HumanPlayer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,7 +56,6 @@
 		1F974B3F1A01A120001B5127 /* BlackJack3_bridging_header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BlackJack3_bridging_header.h; sourceTree = "<group>"; };
 		1F9DEFB31A021028007CAC1E /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
 		1F9DEFB41A021040007CAC1E /* AI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AI.swift; sourceTree = "<group>"; };
-		1F9DEFB61A0210F1007CAC1E /* HumanPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HumanPlayer.swift; sourceTree = "<group>"; };
 		50BD2F90FFBC88EB0CA0D8DD /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3AA580B01430843B81239FA /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -129,7 +127,6 @@
 				1F974B3F1A01A120001B5127 /* BlackJack3_bridging_header.h */,
 				1F9DEFB31A021028007CAC1E /* MyPlayground.playground */,
 				1F9DEFB41A021040007CAC1E /* AI.swift */,
-				1F9DEFB61A0210F1007CAC1E /* HumanPlayer.swift */,
 			);
 			path = BlackJack3;
 			sourceTree = "<group>";
@@ -311,7 +308,6 @@
 				1F8857A71A018E7F003747EF /* Player.swift in Sources */,
 				1F8857A51A018E74003747EF /* ViewController.swift in Sources */,
 				1F8857A21A018E6B003747EF /* Dealer.swift in Sources */,
-				1F9DEFB71A0210F1007CAC1E /* HumanPlayer.swift in Sources */,
 				1F8857A11A018E6B003747EF /* Card.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
