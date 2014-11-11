@@ -9,16 +9,20 @@
 import UIKit
 
 class ViewController: UIViewController {
-   // var blackJack = BlackjackModel()
-    var bj: BlackjackModel!
-    var blackJack: BlackjackModel!
+    
+    var bj:BlackjackModel!
     var playerLabels:[UILabel] = []
     var playerBets: [UITextField] = []
     var playerFunds: [UITextField] = []
-    var playerCardsImageViews:[UIImageView] = []
-    var aiCardsImageViews:[UIImageView] = []
-    var dealerCardsImageViews:[UIImageView] = []
-
+    var playerCardsImageViews =  [UIImageView]()
+    var aiCardsImageViews = [UIImageView]()
+    var dealerCardsImageViews = [UIImageView]()
+    
+    required init(coder aDecoder: (NSCoder!)) {
+        super.init(coder: aDecoder)
+        
+    }
+  
     @IBOutlet weak var dealButton: UIButton!
     var playerResults:[UITextField] = []
     var activePlayerIndex = 0
@@ -44,22 +48,21 @@ class ViewController: UIViewController {
     @IBOutlet weak var playerBet: UITextField!
     @IBOutlet weak var playerFund: UITextField!
     
-    
     func refreshUI(){
-        playerBet.text = String(blackJack.players[0].playerBet.description)
-        playerFund.text = String(blackJack.players[0].funds.description)
-        gameOverField.text = String(blackJack.players[0].gameOverMess)
-        AIBet.text = String(blackJack.players[1].playerBet.description)
-        AIFunds.text = String(blackJack.players[1].funds.description)
-        gameOverField.text = gameOverField.text + String(blackJack.players[1].gameOverMess) + String(blackJack.dealer.gameOverMess)
-        self.getPlayerCardImages(blackJack.players[0])
-        self.getPlayerCardImages(blackJack.players[1])
-        self.getPlayerCardImages(blackJack.dealer)
-       print(blackJack)
-        if (activePlayerIndex < blackJack.players.count) && (blackJack.players[0].gameover || blackJack.players[1].gameover){
+        var playerd: Player = bj.players[0]
+        var ai: Player = bj.players[1]
+        playerBet.text = String(playerd.playerBet.description)
+        playerFund.text = String(playerd.funds.description)
+        AIBet.text = String(ai.playerBet.description)
+        AIFunds.text = String(ai.funds.description)
+        gameOverField.text = gameOverField.text + playerd.gameOverMess + ai.gameOverMess + bj.dealer.gameOverMess
+//        self.getPlayerCardImages(playerd)
+//        self.getPlayerCardImages(ai)
+//        self.getPlayerCardImages(bj.dealer)
+        if (activePlayerIndex < bj.players.count) && (playerd.gameover){
             stay()
         }
-        else if blackJack.dealer.gameover{
+        else if bj.dealer.gameover{
             gameOver()
         }
         
@@ -67,7 +70,62 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        blackJack = bj
+        bj.deal()
+        var i = 0
+        hitButton.hidden = false
+        stayButton.hidden = false
+        
+        
+        var playerHand = bj.players[0].hand
+        var aiHand = bj.players[1].hand
+        var dealerHand = bj.dealer.hand
+        var cardHeight = CGFloat(150)
+        var cardWidth = CGFloat(105)
+        var cardPlayerY = self.playerCardView.frame.minY
+        var cardAiY = self.aiCardView.frame.minY
+        var cardDealerY = self.dealerCardView.frame.minY
+        var cardPlayerX:CGFloat!
+        var cardAiX:CGFloat!
+        var cardDealerX:CGFloat!
+        var dealerCardName:String!
+        while i < 2{
+            if i == 0{
+                cardPlayerX = self.playerCardView.frame.minX
+                cardAiX = self.aiCardView.frame.minX
+                cardDealerX = self.dealerCardView.frame.minX
+                dealerCardName = "card-back"
+            }
+            else if i == 1{
+                cardPlayerX = self.playerCardsImageViews.last!.center.x
+                cardAiX = self.aiCardsImageViews.last!.center.x
+                cardDealerX = self.dealerCardsImageViews.last!.center.x
+                var addDealerCard = dealerHand[i]
+                dealerCardName = "\(addDealerCard.name)_of_\(addDealerCard.suit)"
+            }
+            var addPlayerCard = playerHand[i]
+            var addAiCard = aiHand[i]
+            var playerCardname = "\(addPlayerCard.name)_of_\(addPlayerCard.suit)"
+            var aiCardname = "\(addAiCard.name)_of_\(addAiCard.suit)"
+            var playercardView = UIImageView(frame: CGRectMake(cardPlayerX,cardPlayerY, cardWidth,cardHeight))
+            var aicardView = UIImageView(frame: CGRectMake(cardAiX,cardAiY, cardWidth,cardHeight))
+            var dealercardView = UIImageView(frame: CGRectMake(cardDealerX,cardDealerY, cardWidth,cardHeight))
+            playercardView.image = UIImage(named:playerCardname)
+            aicardView.image = UIImage(named:aiCardname)
+            dealercardView.image = UIImage(named:dealerCardName)
+            playercardView.contentMode = UIViewContentMode.ScaleToFill
+            aicardView.contentMode = UIViewContentMode.ScaleToFill
+            dealerCardView.contentMode = UIViewContentMode.ScaleToFill
+            self.playerCardsImageViews.append(playercardView)
+            self.aiCardsImageViews.append(aicardView)
+            self.dealerCardsImageViews.append(dealercardView)
+            view.addSubview(playercardView)
+            view.addSubview(aicardView)
+            view.addSubview(dealercardView)
+            i++
+        }
+
+    
+        
         
     }
     
@@ -82,16 +140,16 @@ class ViewController: UIViewController {
 //        if validate_bets_and_deck_num(){
 //            deckCountStepper.hidden = true
 //            deckCountTextField.enabled = false
-//            blackJack.newGame(deckNum: deckCountTextField.text.toInt()!)
-//            var p1funds = blackJack.players[0].funds
-//            var aifund = blackJack.players[1].funds
+//            bj.newGame(deckNum: deckCountTextField.text.toInt()!)
+//            var p1funds = bj.players[0].funds
+//            var aifund = bj.players[1].funds
 //            playerFund.text = NSString(format:"%.2f",p1funds)
 //            playerFund.userInteractionEnabled = false
 //            AIFunds.text = NSString(format:"%.2f",aifund)
 //            AIFunds.userInteractionEnabled = false
 //            //playersFunds = [playerFund,AIFunds]
 //            //playersBets = [playerBet, AIBet]
-//            blackJack.play()
+//            bj.play()
 //            placeBetButton.hidden = true
 //            hitButton.hidden = false
 //            stayButton.hidden = false
@@ -99,49 +157,60 @@ class ViewController: UIViewController {
 //            dealerCardView.hidden = false
 //            activePlayerIndex = 0
 //            playerLabels[activePlayerIndex].backgroundColor = UIColor( red: 0.0, green: 0.0, blue:1.0, alpha: 1.0 )
-//            blackJack.deal()
+//            bj.deal()
 //            gameOverField.text = ""
 //        }
 //        refreshUI()
 //    }
 
     
-    @IBAction func deal(sender: UIButton) {
-        blackJack.deal()
-        dealButton.hidden = true
-        hitButton.hidden = false
-        stayButton.hidden = false
-        refreshUI()
-    }
+//    @IBAction func deal(sender: UIButton) {
+//        bj.deal()
+//        dealButton.hidden = true
+//        hitButton.hidden = false
+//        stayButton.hidden = false
+//        refreshUI()
+//    }
     
     // Only applies to player
     @IBAction func hit(sender:AnyObject){
-        if activePlayerIndex < blackJack.players.count{
-            blackJack.playerHit(blackJack.players[activePlayerIndex])
+        if activePlayerIndex < bj.players.count{
+            bj.playerHit(bj.players[0])
+            var numCards = self.playerCardsImageViews.count
+            var cardX = playerCardsImageViews.last!.center.x
+            var cardY = playerCardView.frame.minY
+            var addCard = bj.players[0].hand.last
+            var name = "\(addCard!.name)_of_\(addCard!.suit)"
+            var cardHeight = CGFloat(150)
+            var cardWidth = CGFloat(105)
+            var cardView = UIImageView(frame: CGRectMake(cardX,cardY, cardWidth,cardHeight))
+            cardView.image = UIImage(named:name)
+            cardView.contentMode = UIViewContentMode.ScaleAspectFill
+            playerCardsImageViews.append(cardView)
+            view.addSubview(cardView)
         }
-        refreshUI()
+        //refreshUI()
     }
     
     
     // Always call stay when a players turn is over or if a player lost or gets bj. This function calls the next players turn.
     func stay(){
         //playerLabels[activePlayerIndex].backgroundColor = UIColor( red: 1.0, green: 1.0, blue:1.0, alpha: 1.0)
-        activePlayerIndex++
+        ++activePlayerIndex
         //Generate AI turn
         if activePlayerIndex == 1{
             hitButton.hidden = true
             stayButton.hidden = true
-            blackJack.generateAITurn()
+            bj.generateAITurn()
             refreshUI()
         }
         //dealerTurn
-        else if activePlayerIndex >= blackJack.players.count{
-            blackJack.dealerTurn()
+        else if activePlayerIndex >= bj.players.count{
+            bj.dealerTurn()
             refreshUI()
-        }else{
-            refreshUI()
-            //playerLabels[activePlayerIndex].backgroundColor = UIColor( red: 0.0, green: 0.0, blue:1.0, alpha: 1.0 )
         }
+            //playerLabels[activePlayerIndex].backgroundColor = UIColor( red: 0.0, green: 0.0, blue:1.0, alpha: 1.0 )
+        
     }
     @IBAction func stay(sender:AnyObject){
         stay()
@@ -166,8 +235,8 @@ class ViewController: UIViewController {
             
         }
         var playerHand = player.hand
-        var cardHeight = CGFloat(100)
-        var cardWidth = CGFloat(100)
+        var cardHeight = CGFloat(150)
+        var cardWidth = CGFloat(105)
         var cardX:CGFloat
         var cardY:CGFloat
         var addCard:Card
@@ -178,7 +247,7 @@ class ViewController: UIViewController {
         while imageViewArray.count < playerHand.count{
             if imageViewArray.isEmpty{
                 cardX = playerContainerView.frame.minX
-                if player.player_name == "Dealer" && playerHand.count == 2{
+                if player.player_name == "Dealer" && playerHand.count == 2 && !bj.dealer.gameover{
                     name = "card-back"
                 }
                 else{
@@ -203,13 +272,11 @@ class ViewController: UIViewController {
 
     func gameOver(){
         activePlayerIndex=0
-        gameOverField.text = blackJack.gameOverMessage
         placeBetButton.setTitle("Play Again", forState: UIControlState.Normal)
-        hitButton.hidden = true
-        stayButton.hidden = true
+
         placeBetButton.hidden = false
         ResetButton.hidden = false
-        for (index,player) in enumerate(blackJack.players){
+        for (index,player) in enumerate(bj.players){
             playerBets[index].userInteractionEnabled=true
         }
         
@@ -218,7 +285,7 @@ class ViewController: UIViewController {
 
 //    @IBAction func resetGame(sender: AnyObject) {
 //        placeBetButton.hidden = true
-//        blackJack = BlackjackModel()
+//        bj = bjModel()
 //
 //        deckCountStepper.hidden = false
 //        deckCountTextField.enabled = true

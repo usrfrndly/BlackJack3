@@ -52,23 +52,8 @@
                                             <action selector="stay:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="2Ax-ln-WaK"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pwb-vr-oSb">
-                                        <rect key="frame" x="481" y="0.0" width="87" height="31"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="31" id="aLa-O0-1vi"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="CourierNewPS-BoldMT" family="Courier New" pointSize="36"/>
-                                        <state key="normal" title="DEAL">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="deal:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="fEu-bh-aBX"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="Pwb-vr-oSb" firstAttribute="top" secondItem="FLz-W6-Pvi" secondAttribute="top" id="BuZ-KZ-hdo"/>
                                     <constraint firstAttribute="trailing" secondItem="oeu-Ut-YhP" secondAttribute="trailing" id="Kja-8s-yR8"/>
                                     <constraint firstAttribute="width" constant="568" id="UeA-aY-fP3"/>
                                     <constraint firstItem="oeu-Ut-YhP" firstAttribute="baseline" secondItem="hx7-sk-O7V" secondAttribute="baseline" id="WJ2-0P-BsJ"/>
@@ -76,7 +61,6 @@
                                     <constraint firstItem="oeu-Ut-YhP" firstAttribute="top" secondItem="hx7-sk-O7V" secondAttribute="top" id="f6c-a6-42o"/>
                                     <constraint firstItem="hx7-sk-O7V" firstAttribute="leading" secondItem="FLz-W6-Pvi" secondAttribute="leading" id="gbD-hK-NjB"/>
                                     <constraint firstItem="hx7-sk-O7V" firstAttribute="top" secondItem="FLz-W6-Pvi" secondAttribute="top" id="qyh-HI-0SH"/>
-                                    <constraint firstAttribute="trailing" secondItem="Pwb-vr-oSb" secondAttribute="trailing" id="wvb-mW-lna"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -233,13 +217,12 @@
                                 </constraints>
                             </view>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" editable="NO" text="Black Jack Game" translatesAutoresizingMaskIntoConstraints="NO" id="97i-zD-Xwz" userLabel="Message Field">
-                                <rect key="frame" x="15" y="494" width="568" height="73"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <rect key="frame" x="15" y="481" width="568" height="105"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" none="YES" notEnabled="YES"/>
                                 </accessibility>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="73" id="va0-B2-yeQ"/>
+                                    <constraint firstAttribute="height" constant="105" id="va0-B2-yeQ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -257,8 +240,8 @@
                             <constraint firstItem="Gzj-rS-T2w" firstAttribute="top" secondItem="8ER-l6-Fh1" secondAttribute="bottom" constant="20" id="9dQ-xf-b3z"/>
                             <constraint firstItem="NbF-QV-sLI" firstAttribute="baseline" secondItem="YMr-BN-vUO" secondAttribute="baseline" id="Bdl-yk-g4d"/>
                             <constraint firstItem="MEd-Sk-5Xa" firstAttribute="baseline" secondItem="UfQ-NE-Bbt" secondAttribute="baseline" constant="3" id="CZf-Gz-NdA"/>
-                            <constraint firstItem="97i-zD-Xwz" firstAttribute="top" secondItem="CIt-7z-xNh" secondAttribute="bottom" constant="8" id="ECh-RW-9GH"/>
-                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="97i-zD-Xwz" secondAttribute="bottom" constant="33" id="EOa-dm-BRk"/>
+                            <constraint firstItem="97i-zD-Xwz" firstAttribute="top" secondItem="CIt-7z-xNh" secondAttribute="bottom" constant="-5" id="ECh-RW-9GH"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="97i-zD-Xwz" secondAttribute="bottom" constant="14" id="EOa-dm-BRk"/>
                             <constraint firstItem="NMy-9D-fSf" firstAttribute="top" secondItem="NbF-QV-sLI" secondAttribute="top" constant="10" id="EmW-Ql-Xcn"/>
                             <constraint firstItem="15p-Nb-AOP" firstAttribute="baseline" secondItem="NMy-9D-fSf" secondAttribute="baseline" id="Ffu-5D-Nuw"/>
                             <constraint firstItem="Ibq-AF-Xaq" firstAttribute="top" secondItem="15p-Nb-AOP" secondAttribute="bottom" id="Fhk-pB-7tz"/>
@@ -339,7 +322,6 @@
                         <outlet property="AIBet" destination="ylX-Tl-pic" id="TGw-ES-r6h"/>
                         <outlet property="AIFunds" destination="5Zc-Gy-1Ae" id="lL7-0b-cUO"/>
                         <outlet property="aiCardView" destination="k8J-5b-GRZ" id="HKJ-88-iGE"/>
-                        <outlet property="dealButton" destination="Pwb-vr-oSb" id="VjF-mG-zpE"/>
                         <outlet property="dealerCardView" destination="CIt-7z-xNh" id="Q7e-oA-X9u"/>
                         <outlet property="gameOverField" destination="97i-zD-Xwz" id="HYI-mn-8h5"/>
                         <outlet property="hitButton" destination="hx7-sk-O7V" id="JbM-2y-9uN"/>
@@ -372,7 +354,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uhv-IC-eaG" userLabel="Controls view">
-                                <rect key="frame" x="178" y="190" width="244" height="168"/>
+                                <rect key="frame" x="178" y="92" width="244" height="168"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zR3-zm-1Yh" userLabel="Bet view">
                                         <rect key="frame" x="8" y="130" width="228" height="30"/>
@@ -487,14 +469,8 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="T5e-dV-Rji">
-                                <rect key="frame" x="178" y="114" width="244" height="68"/>
-                                <color key="textColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" name="CourierNewPSMT" family="Courier New" pointSize="18"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tz0-7x-I4o">
-                                <rect key="frame" x="231" y="379" width="139" height="30"/>
+                                <rect key="frame" x="231" y="274" width="139" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="139" id="6Ok-bc-o8b"/>
                                 </constraints>
@@ -509,10 +485,10 @@
                         </subviews>
                         <color key="backgroundColor" red="0.019607843140000001" green="0.50196078430000002" blue="0.090196078430000007" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="centerY" secondItem="Uhv-IC-eaG" secondAttribute="centerY" constant="26" id="2NJ-ct-BdE"/>
+                            <constraint firstAttribute="centerY" secondItem="Uhv-IC-eaG" secondAttribute="centerY" constant="124" id="2NJ-ct-BdE"/>
                             <constraint firstItem="tz0-7x-I4o" firstAttribute="centerX" secondItem="Uhv-IC-eaG" secondAttribute="centerX" id="CcW-iO-oD3"/>
-                            <constraint firstItem="t79-WL-Zce" firstAttribute="top" secondItem="tz0-7x-I4o" secondAttribute="bottom" constant="191" id="FUV-yq-ePG"/>
-                            <constraint firstItem="tz0-7x-I4o" firstAttribute="top" secondItem="Uhv-IC-eaG" secondAttribute="bottom" constant="21" id="PKp-lg-eSQ"/>
+                            <constraint firstItem="t79-WL-Zce" firstAttribute="top" secondItem="tz0-7x-I4o" secondAttribute="bottom" constant="296" id="FUV-yq-ePG"/>
+                            <constraint firstItem="tz0-7x-I4o" firstAttribute="top" secondItem="Uhv-IC-eaG" secondAttribute="bottom" constant="14" id="PKp-lg-eSQ"/>
                             <constraint firstAttribute="centerX" secondItem="yBu-e1-ElV" secondAttribute="centerX" id="RiZ-1p-gn9"/>
                             <constraint firstItem="Uhv-IC-eaG" firstAttribute="top" secondItem="yBu-e1-ElV" secondAttribute="bottom" constant="20" id="YR3-Ab-nFp"/>
                             <constraint firstItem="yBu-e1-ElV" firstAttribute="top" secondItem="dYO-iS-1Ud" secondAttribute="bottom" id="bjw-Qk-tFA"/>
@@ -537,7 +513,6 @@
                         <outlet property="betAmountField" destination="DLh-ZU-UBh" id="7ib-4s-6Xm"/>
                         <outlet property="deckNumberField" destination="Udp-Mg-wDX" id="9Mh-SP-Yge"/>
                         <outlet property="deckUIStepper" destination="WBy-Tj-QCQ" id="70t-yc-JIk"/>
-                        <outlet property="gameMessageField" destination="T5e-dV-Rji" id="AAn-ys-Ft5"/>
                         <outlet property="totalFundsField" destination="g7e-Dz-PSY" id="8oS-Ti-0PK"/>
                     </connections>
                 </viewController>

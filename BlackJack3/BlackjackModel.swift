@@ -95,7 +95,7 @@ class BlackjackModel{
 
     func push(player:Player){
         //player.gameOverMess = "Shucks - it's a tie for Player \(player.playerNumber) ."
-        player.gameOverMess = "TIE"
+        player.gameOverMess = "\(player.player_name)  got a TIE"
     }
     
     /**
@@ -105,7 +105,7 @@ class BlackjackModel{
     func playerBj(player:Player){
         player.gameover = true
         player.funds += player.playerBet*1.5
-        player.gameOverMess="BLACKJACK."
+        player.gameOverMess=" \(player.player_name)  got BLACKJACK."
         //gameOverMessage = "Player \(player.playerNumber) got BLACKJACK, YEERHAW! Wanna play again? Click the New Game button and place a bet."
     }
     
@@ -115,7 +115,7 @@ class BlackjackModel{
     func playerWin(player:Player){
         player.gameover = true
         player.funds += player.playerBet
-        player.gameOverMess="WON."
+        player.gameOverMess="\(player.player_name) WON."
         //gameOverMessage = "Player \(player.playerNumber) beat the dealer! Ride em cowgirl. Wanna play again? Click the New Game button and place a bet."
         
     }
@@ -126,7 +126,7 @@ class BlackjackModel{
     func playerLose(player:Player){
         player.gameover = true
         player.funds-=player.playerBet
-        player.gameOverMess="LOST."
+        player.gameOverMess="\(player.player_name)  LOST."
     }
     
     /**
