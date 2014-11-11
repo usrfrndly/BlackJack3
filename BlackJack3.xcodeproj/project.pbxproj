@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1F29A9461A1244740071DFA3 /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F29A9451A1244740071DFA3 /* Firebase.framework */; };
+		1F29A9481A12623F0071DFA3 /* GooglePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F29A9471A12623F0071DFA3 /* GooglePlus.framework */; };
+		1F29A94A1A1262490071DFA3 /* GoogleOpenSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F29A9491A1262490071DFA3 /* GoogleOpenSource.framework */; };
 		1F6C2B2F1A10C7DF0060A5F0 /* GamePropertiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6C2B2E1A10C7DF0060A5F0 /* GamePropertiesViewController.swift */; };
 		1F8857781A0185D6003747EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8857771A0185D6003747EF /* AppDelegate.swift */; };
 		1F88577B1A0185D6003747EF /* BlackJack3.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1F8857791A0185D6003747EF /* BlackJack3.xcdatamodeld */; };
@@ -23,6 +24,7 @@
 		1F8857A71A018E7F003747EF /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8857A61A018E7F003747EF /* Player.swift */; };
 		1F8857A91A018F0B003747EF /* CardImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F8857A81A018F0B003747EF /* CardImages.xcassets */; };
 		1F9DEFB51A021040007CAC1E /* AI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9DEFB41A021040007CAC1E /* AI.swift */; };
+		9F51F090EDCEC5FA8B8269D6 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E1FFDF5D4FD8DCE36ED5C43 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1F29A9451A1244740071DFA3 /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Firebase.framework; sourceTree = "<group>"; };
+		1F29A9471A12623F0071DFA3 /* GooglePlus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GooglePlus.framework; sourceTree = "<group>"; };
+		1F29A9491A1262490071DFA3 /* GoogleOpenSource.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleOpenSource.framework; sourceTree = "<group>"; };
 		1F6C2B2E1A10C7DF0060A5F0 /* GamePropertiesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamePropertiesViewController.swift; sourceTree = "<group>"; };
 		1F8857721A0185D6003747EF /* BlackJack3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlackJack3.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F8857761A0185D6003747EF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -59,6 +62,9 @@
 		1F9DEFB31A021028007CAC1E /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
 		1F9DEFB41A021040007CAC1E /* AI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AI.swift; sourceTree = "<group>"; };
 		1FBF9B711A11EEC00036BEBF /* BlackJack3_bridging_header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BlackJack3_bridging_header.h; sourceTree = "<group>"; };
+		20C8368332BCCA31EA134552 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		6E1FFDF5D4FD8DCE36ED5C43 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF80817B91A4AD424F774410 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,7 +72,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1F29A9461A1244740071DFA3 /* Firebase.framework in Frameworks */,
+				9F51F090EDCEC5FA8B8269D6 /* libPods.a in Frameworks */,
+				1F29A94A1A1262490071DFA3 /* GoogleOpenSource.framework in Frameworks */,
+				1F29A9481A12623F0071DFA3 /* GooglePlus.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,14 +88,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		16C6D49BDAB4AE99B89C16B5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6E1FFDF5D4FD8DCE36ED5C43 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		1F8857691A0185D6003747EF = {
 			isa = PBXGroup;
 			children = (
-				1F29A9451A1244740071DFA3 /* Firebase.framework */,
+				1F29A9491A1262490071DFA3 /* GoogleOpenSource.framework */,
+				1F29A9471A12623F0071DFA3 /* GooglePlus.framework */,
 				1F8857A81A018F0B003747EF /* CardImages.xcassets */,
 				1F8857741A0185D6003747EF /* BlackJack3 */,
 				1F88578D1A0185D6003747EF /* BlackJack3Tests */,
 				1F8857731A0185D6003747EF /* Products */,
+				90ABC58C467EE1A00AF7E0C1 /* Pods */,
+				16C6D49BDAB4AE99B89C16B5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -149,6 +168,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		90ABC58C467EE1A00AF7E0C1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				20C8368332BCCA31EA134552 /* Pods.debug.xcconfig */,
+				AF80817B91A4AD424F774410 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -156,9 +184,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1F8857941A0185D6003747EF /* Build configuration list for PBXNativeTarget "BlackJack3" */;
 			buildPhases = (
+				A3CB57FA06913255C23B5D3C /* Check Pods Manifest.lock */,
 				1F88576E1A0185D6003747EF /* Sources */,
 				1F88576F1A0185D6003747EF /* Frameworks */,
 				1F8857701A0185D6003747EF /* Resources */,
+				82FCD74BE4566DBD2B2FF436 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -244,6 +274,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		82FCD74BE4566DBD2B2FF436 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A3CB57FA06913255C23B5D3C /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1F88576E1A0185D6003747EF /* Sources */ = {
@@ -377,6 +440,7 @@
 		};
 		1F8857951A0185D6003747EF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 20C8368332BCCA31EA134552 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -392,6 +456,7 @@
 		};
 		1F8857961A0185D6003747EF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AF80817B91A4AD424F774410 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = (
