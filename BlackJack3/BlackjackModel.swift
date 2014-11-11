@@ -22,7 +22,6 @@ class BlackjackModel{
         players.append(Player())
         players.append(AI())
         self.decks = Decks()
-        self.decks.deck = decks.shuffleDeck()
         self.dealer = Dealer()
         self.gameNumber = 0
         self.gameOverMessage = nil
@@ -81,9 +80,11 @@ class BlackjackModel{
             // Check whether either or both the player or dealer have blackjack
             // If both player and dealer have blackjack -> push()
             if player.hasBlackjack() && dealerHasBlackjack{
+                dealer.gameover=true
                 push(player)
             }
             else if !player.hasBlackjack() && dealerHasBlackjack {
+                dealer.gameover=true
                 playerLose(player)
             }
             else if player.hasBlackjack() && !dealerHasBlackjack{
@@ -102,6 +103,7 @@ class BlackjackModel{
     they win 1.5 times their bet
     */
     func playerBj(player:Player){
+        player.gameover = true
         player.funds += player.playerBet*1.5
         player.gameOverMess="BLACKJACK."
         //gameOverMessage = "Player \(player.playerNumber) got BLACKJACK, YEERHAW! Wanna play again? Click the New Game button and place a bet."
@@ -111,6 +113,7 @@ class BlackjackModel{
     If dealer busts or player has a higher value under 21 than the dealer, the player wins the amount she put in
     */
     func playerWin(player:Player){
+        player.gameover = true
         player.funds += player.playerBet
         player.gameOverMess="WON."
         //gameOverMessage = "Player \(player.playerNumber) beat the dealer! Ride em cowgirl. Wanna play again? Click the New Game button and place a bet."
@@ -121,6 +124,7 @@ class BlackjackModel{
     than the player, the player loses the amount that they bet
     */
     func playerLose(player:Player){
+        player.gameover = true
         player.funds-=player.playerBet
         player.gameOverMess="LOST."
     }
@@ -155,7 +159,7 @@ class BlackjackModel{
                     }
                     else{
                         stay = true
-                        ai.gameOverMess = "You hit \(numHits) times"
+                        ai.gameOverMess = "AI hit \(numHits) times"
                     }
                 }
                 else{ // ai soft hand
@@ -165,7 +169,7 @@ class BlackjackModel{
                     }
                     else{
                         stay = true
-                        ai.gameOverMess = "You hit \(numHits) times"
+                        ai.gameOverMess = "AI hit \(numHits) times"
                     }
                     
                 }
@@ -178,7 +182,7 @@ class BlackjackModel{
                     }
                     else{
                         stay = true
-                        ai.gameOverMess = "You hit \(numHits) times"
+                        ai.gameOverMess = "AI hit \(numHits) times"
                     }
                 }
                 else{ // soft hand
@@ -188,7 +192,7 @@ class BlackjackModel{
                     }
                     else{
                         stay = true
-                        ai.gameOverMess = "You hit \(numHits) times"
+                        ai.gameOverMess = "AI hit \(numHits) times"
                     }
                 }
             }
@@ -200,7 +204,7 @@ class BlackjackModel{
                     }
                     else{
                         stay = true
-                        ai.gameOverMess = "You hit \(numHits) times"
+                        ai.gameOverMess = "AI hit \(numHits) times"
                     }
                 }
                 else{ // soft hand
@@ -210,11 +214,13 @@ class BlackjackModel{
                     }
                     else{
                         stay = true
-                        ai.gameOverMess = "You hit \(numHits) times"
+                        ai.gameOverMess = "AI hit \(numHits) times"
                     }
                 }
             }
         } // ai stay
+        
+       // player[1].gameover=true
         
     }
     /**
@@ -230,7 +236,7 @@ class BlackjackModel{
         }
         for player in players{
             // Check if player has already gotten blackjack or busted
-            if player.gameOverMess.isEmpty{
+            if !player.gameover{
                 if dealer.totaledHand > 21 && player.totaledHand<=21{ // Dealer busts, player wins
                     playerWin(player)
                 }
@@ -246,5 +252,6 @@ class BlackjackModel{
             
             }
         }
+        dealer.gameover = true
     }
 }

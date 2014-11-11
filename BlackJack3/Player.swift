@@ -29,6 +29,8 @@ class Player{
     //var lost:Bool
     var gameOverMess:String
     
+    var gameover = false
+    
     init(){
         self.hand=[]
         self.totaledHand = 0
@@ -112,6 +114,7 @@ class Player{
         gameOverMess=""
         hand=[]
         totaledHand=0
+        gameover = false
         //playerBet=0
     }
     

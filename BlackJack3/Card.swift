@@ -53,7 +53,7 @@ class Card:NSObject{
     :returns: True if card is an ace
     */
     func isAce() -> Bool{
-        if name == "A"{
+        if name == "ace"{
             return true
         }
         else{

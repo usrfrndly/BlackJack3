@@ -51,15 +51,17 @@ class ViewController: UIViewController {
         gameOverField.text = String(blackJack.players[0].gameOverMess)
         AIBet.text = String(blackJack.players[1].playerBet.description)
         AIFunds.text = String(blackJack.players[1].funds.description)
-        gameOverField.text = gameOverField.text + String(blackJack.players[1].gameOverMess)
-        
+        gameOverField.text = gameOverField.text + String(blackJack.players[1].gameOverMess) + String(blackJack.dealer.gameOverMess)
         self.getPlayerCardImages(blackJack.players[0])
         self.getPlayerCardImages(blackJack.players[1])
         self.getPlayerCardImages(blackJack.dealer)
-       
-//        if activePlayerIndex < blackJack.players.count && !blackJack.players[activePlayerIndex].gameOverMess.isEmpty{
-//            stay()
-//        }
+       print(blackJack)
+        if (activePlayerIndex < blackJack.players.count) && (blackJack.players[0].gameover || blackJack.players[1].gameover){
+            stay()
+        }
+        else if blackJack.dealer.gameover{
+            gameOver()
+        }
         
     }
     
@@ -111,27 +113,34 @@ class ViewController: UIViewController {
         stayButton.hidden = false
         refreshUI()
     }
-
+    
+    // Only applies to player
     @IBAction func hit(sender:AnyObject){
         if activePlayerIndex < blackJack.players.count{
             blackJack.playerHit(blackJack.players[activePlayerIndex])
         }
         refreshUI()
     }
-
+    
+    
+    // Always call stay when a players turn is over or if a player lost or gets bj. This function calls the next players turn.
     func stay(){
-        playerLabels[activePlayerIndex].backgroundColor = UIColor( red: 1.0, green: 1.0, blue:1.0, alpha: 1.0)
+        //playerLabels[activePlayerIndex].backgroundColor = UIColor( red: 1.0, green: 1.0, blue:1.0, alpha: 1.0)
         activePlayerIndex++
+        //Generate AI turn
         if activePlayerIndex == 1{
+            hitButton.hidden = true
+            stayButton.hidden = true
             blackJack.generateAITurn()
+            refreshUI()
         }
+        //dealerTurn
         else if activePlayerIndex >= blackJack.players.count{
             blackJack.dealerTurn()
             refreshUI()
-            gameOver()
         }else{
             refreshUI()
-            playerLabels[activePlayerIndex].backgroundColor = UIColor( red: 0.0, green: 0.0, blue:1.0, alpha: 1.0 )
+            //playerLabels[activePlayerIndex].backgroundColor = UIColor( red: 0.0, green: 0.0, blue:1.0, alpha: 1.0 )
         }
     }
     @IBAction func stay(sender:AnyObject){
@@ -157,8 +166,8 @@ class ViewController: UIViewController {
             
         }
         var playerHand = player.hand
-        var cardHeight = CGFloat(50)
-        var cardWidth = CGFloat(50)
+        var cardHeight = CGFloat(100)
+        var cardWidth = CGFloat(100)
         var cardX:CGFloat
         var cardY:CGFloat
         var addCard:Card
@@ -184,9 +193,10 @@ class ViewController: UIViewController {
             }
             cardView = UIImageView(frame: CGRectMake(cardX,cardY, cardWidth,cardHeight))
             cardView.image = UIImage(named:name)
-            cardView.contentMode = UIViewContentMode.ScaleAspectFit
+        
+            cardView.contentMode = UIViewContentMode.ScaleAspectFill
             imageViewArray.append(cardView)
-            playerContainerView.addSubview(cardView)
+            view.addSubview(cardView)
         }
     }
 
@@ -202,6 +212,7 @@ class ViewController: UIViewController {
         for (index,player) in enumerate(blackJack.players){
             playerBets[index].userInteractionEnabled=true
         }
+        
         
     }
 

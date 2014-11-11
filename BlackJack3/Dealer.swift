@@ -30,6 +30,7 @@ class Dealer:Player{
         // The first card in the dealers hand is the holeCard, whose value is hidden
         if hand.isEmpty{
             holeCard = card
+            hand.append(card)
         }else{
             if hand.count == 1{
                 faceUpCard = card
@@ -100,6 +101,7 @@ class Dealer:Player{
         holeCard = nil
         hand=[]
         totaledHand=0
+        gameover = false
     }
     
 }
