@@ -16,16 +16,17 @@ class Dealer:Player{
     /// The face down card
     var holeCard:Card? = nil
     var faceUpCard:Card? = nil
-    init(){
-        
-    }
+    override var player_name:String { get{ return "Dealer" } }
     
-    /**
+  
+
+    
+    /**s
     Adds a card to the dealer's hand
     
     :param: card card
     */
-    func addCard(card:Card){
+    override func addCard(card:Card){
         // The first card in the dealers hand is the holeCard, whose value is hidden
         if hand.isEmpty{
             holeCard = card
@@ -42,15 +43,15 @@ class Dealer:Player{
             // If previous ace was set to 11 and should be reset to 1
             if totaledHand > 21 && aces>=1 && aces >= subtractAces{
                 var index:Int?
-                for i in 0..<len(hand){
+                for i in 0..<hand.count{
                     if hand[i].value==11{
                         index = i
                         break
                     }
                 }
 
-                if index!=nil{
-                    hand[index].makeSmallAce()
+                if index != nil{
+                    hand[index!].makeSmallAce()
                     totaledHand-=10
                     subtractAces++
                 }
@@ -71,7 +72,7 @@ class Dealer:Player{
             }
         }
     }
-
+    override
     func hasBlackjack()->Bool{
         if holeCard != nil{
             calculateHoleCard()
@@ -95,7 +96,7 @@ class Dealer:Player{
         }
     }
     
-    func clear(){
+    override func clear(){
         holeCard = nil
         hand=[]
         totaledHand=0

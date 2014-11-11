@@ -8,8 +8,9 @@
 
 import Foundation
 
-class AI:Player{
 
+class AI:Player{
+    override var player_name:String{ get{ return "AI" } }
 
     //generate_turn():
 }

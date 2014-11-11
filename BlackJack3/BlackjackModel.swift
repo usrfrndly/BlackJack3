@@ -19,12 +19,15 @@ class BlackjackModel{
     
     init(){
         self.players = []
+        players.append(Player())
+        players.append(AI())
         self.decks = Decks()
         self.decks.deck = decks.shuffleDeck()
         self.dealer = Dealer()
         self.gameNumber = 0
         self.gameOverMessage = nil
         self.playerNumber = 2
+        
     }
     
     func play(){
@@ -44,8 +47,6 @@ class BlackjackModel{
     }
     
     func newGame(deckNum:Int=3) {
-        players.append(Player())
-        players.append(AI())
         self.decks = Decks(numDecks: deckNum)
         self.decks.deck = self.decks.shuffleDeck()
         play()

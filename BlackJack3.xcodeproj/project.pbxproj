@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1D391B178DCA6A238B567826 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50BD2F90FFBC88EB0CA0D8DD /* libPods.a */; };
+		1F6C2B2F1A10C7DF0060A5F0 /* GamePropertiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6C2B2E1A10C7DF0060A5F0 /* GamePropertiesViewController.swift */; };
 		1F8857781A0185D6003747EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8857771A0185D6003747EF /* AppDelegate.swift */; };
 		1F88577B1A0185D6003747EF /* BlackJack3.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1F8857791A0185D6003747EF /* BlackJack3.xcdatamodeld */; };
 		1F8857821A0185D6003747EF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F8857811A0185D6003747EF /* Images.xcassets */; };
@@ -36,6 +37,7 @@
 
 /* Begin PBXFileReference section */
 		097594582F948C6E96F0E768 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		1F6C2B2E1A10C7DF0060A5F0 /* GamePropertiesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamePropertiesViewController.swift; sourceTree = "<group>"; };
 		1F8857721A0185D6003747EF /* BlackJack3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlackJack3.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F8857761A0185D6003747EF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1F8857771A0185D6003747EF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 				1F974B3F1A01A120001B5127 /* BlackJack3_bridging_header.h */,
 				1F9DEFB31A021028007CAC1E /* MyPlayground.playground */,
 				1F9DEFB41A021040007CAC1E /* AI.swift */,
+				1F6C2B2E1A10C7DF0060A5F0 /* GamePropertiesViewController.swift */,
 			);
 			path = BlackJack3;
 			sourceTree = "<group>";
@@ -301,6 +304,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F88577B1A0185D6003747EF /* BlackJack3.xcdatamodeld in Sources */,
+				1F6C2B2F1A10C7DF0060A5F0 /* GamePropertiesViewController.swift in Sources */,
 				1F88579B1A018D83003747EF /* BlackjackModel.swift in Sources */,
 				1F9DEFB51A021040007CAC1E /* AI.swift in Sources */,
 				1F8857A31A018E6B003747EF /* Decks.swift in Sources */,

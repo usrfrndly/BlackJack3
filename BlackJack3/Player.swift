@@ -24,6 +24,7 @@ class Player{
     var totaledHand:Int
     var aces:Int
     var subtractAces:Int
+    var player_name:String { get { return "Player" } } 
     
     //var lost:Bool
     var gameOverMess:String
