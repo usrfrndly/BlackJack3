@@ -11,9 +11,7 @@ import UIKit
 class ViewController: UIViewController {
     
     var bj:BlackjackModel!
-    var playerLabels:[UILabel] = []
-    var playerBets: [UITextField] = []
-    var playerFunds: [UITextField] = []
+  
     var playerCardsImageViews =  [UIImageView]()
     var aiCardsImageViews = [UIImageView]()
     var dealerCardsImageViews = [UIImageView]()
@@ -23,10 +21,7 @@ class ViewController: UIViewController {
         
     }
   
-    @IBOutlet weak var dealButton: UIButton!
-    var playerResults:[UITextField] = []
     var activePlayerIndex = 0
-    var tableData = ["Player1", "AI", "Dealer"]
     
     // Cards View Containers
     @IBOutlet weak var playerCardView: UIView!
@@ -34,7 +29,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var dealerCardView: UIView!
     
     // TO DO: these dont do anything.
-    @IBOutlet weak var placeBetButton: UIButton!
     @IBOutlet weak var ResetButton: UIButton!
     @IBOutlet weak var stayButton: UIButton!
     @IBOutlet weak var hitButton: UIButton!
@@ -48,6 +42,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var playerBet: UITextField!
     @IBOutlet weak var playerFund: UITextField!
     
+    @IBOutlet weak var playAgainButton: UIButton!
+    @IBOutlet weak var startButton: UIButton!
+    @IBOutlet weak var changeBetButton: UIButton!
+    
     func refreshUI(){
         var playerd: Player = bj.players[0]
         var ai: Player = bj.players[1]
@@ -55,12 +53,11 @@ class ViewController: UIViewController {
         playerFund.text = String(playerd.funds.description)
         AIBet.text = String(ai.playerBet.description)
         AIFunds.text = String(ai.funds.description)
-        gameOverField.text = gameOverField.text + playerd.gameOverMess + ai.gameOverMess + bj.dealer.gameOverMess
-//        self.getPlayerCardImages(playerd)
-//        self.getPlayerCardImages(ai)
+        gameOverField.text = playerd.gameOverMess + ai.gameOverMess + bj.dealer.gameOverMess
 //        self.getPlayerCardImages(bj.dealer)
         if (activePlayerIndex < bj.players.count) && (playerd.gameover){
             stay()
+        
         }
         else if bj.dealer.gameover{
             gameOver()
@@ -75,7 +72,7 @@ class ViewController: UIViewController {
         hitButton.hidden = false
         stayButton.hidden = false
         
-        
+        // Assign images to the cards that were just dealt out
         var playerHand = bj.players[0].hand
         var aiHand = bj.players[1].hand
         var dealerHand = bj.dealer.hand
@@ -174,7 +171,7 @@ class ViewController: UIViewController {
     
     // Only applies to player
     @IBAction func hit(sender:AnyObject){
-        if activePlayerIndex < bj.players.count{
+        if activePlayerIndex < bj.players.count && !bj.players[0].gameover{
             bj.playerHit(bj.players[0])
             var numCards = self.playerCardsImageViews.count
             var cardX = playerCardsImageViews.last!.center.x
@@ -189,10 +186,77 @@ class ViewController: UIViewController {
             playerCardsImageViews.append(cardView)
             view.addSubview(cardView)
         }
+        else if bj.players[0].gameover{
+            gameOverField.text = bj.players[0].gameOverMess
+            stay()
+        }
         //refreshUI()
     }
     
-    
+    func getAiCardImages(){
+        var aiHand = bj.players[1].hand
+        var cardHeight = CGFloat(150)
+        var cardWidth = CGFloat(105)
+        var cardX:CGFloat
+        var cardY:CGFloat
+        var addCard:Card
+        var name:String?
+        
+        cardY = self.aiCardView.frame.minY
+        cardX = self.dealerCardsImageViews.last!.center.x
+
+        var cardView:UIImageView
+        while self.aiCardsImageViews.count < aiHand.count{
+            
+            addCard = aiHand[self.aiCardsImageViews.count]
+            name = "\(addCard.name)_of_\(addCard.suit)"
+            cardView = UIImageView(frame: CGRectMake(cardX,cardY, cardWidth,cardHeight))
+            cardView.image = UIImage(named:name!)
+            
+            cardView.contentMode = UIViewContentMode.ScaleAspectFill
+            self.aiCardsImageViews.append(cardView)
+            view.addSubview(cardView)
+        }
+        
+        
+    }
+
+    func getDealerCardImages(){
+        var dealerHand = bj.dealer.hand
+        var cardHeight = CGFloat(150)
+        var cardWidth = CGFloat(105)
+        var cardX:CGFloat
+        var cardY:CGFloat
+        var addCard:Card
+        var name:String?
+        
+        cardY = self.dealerCardView.frame.minY
+        cardX = self.dealerCardsImageViews.last!.center.x
+
+        var cardView:UIImageView
+        //turn over hole card.
+        
+        var holeCard = bj.dealer.holeCard!
+        name = "\(holeCard.name)_of_\(holeCard.suit)"
+
+        self.dealerCardsImageViews[0].image = UIImage(named:name!)
+        while self.dealerCardsImageViews.count < dealerHand.count{
+            addCard = dealerHand[self.dealerCardsImageViews.count]
+            name = "\(addCard.name)_of_\(addCard.suit)"
+            cardView = UIImageView(frame: CGRectMake(cardX,cardY, cardWidth,cardHeight))
+            cardView.image = UIImage(named:name!)
+            
+            cardView.contentMode = UIViewContentMode.ScaleAspectFill
+            self.dealerCardsImageViews.append(cardView)
+            view.addSubview(cardView)
+        }
+        
+    }
+
+
+
+
+
     // Always call stay when a players turn is over or if a player lost or gets bj. This function calls the next players turn.
     func stay(){
         //playerLabels[activePlayerIndex].backgroundColor = UIColor( red: 1.0, green: 1.0, blue:1.0, alpha: 1.0)
@@ -202,11 +266,13 @@ class ViewController: UIViewController {
             hitButton.hidden = true
             stayButton.hidden = true
             bj.generateAITurn()
+            getAiCardImages()
             refreshUI()
         }
         //dealerTurn
         else if activePlayerIndex >= bj.players.count{
             bj.dealerTurn()
+            getDealerCardImages()
             refreshUI()
         }
             //playerLabels[activePlayerIndex].backgroundColor = UIColor( red: 0.0, green: 0.0, blue:1.0, alpha: 1.0 )
@@ -216,73 +282,24 @@ class ViewController: UIViewController {
         stay()
     }
 
-    func getPlayerCardImages(player: Player){
-        var playerContainerView:UIView
-        var imageViewArray:[UIImageView]
-        switch player.player_name{
-        case "Dealer":
-            playerContainerView = self.dealerCardView
-            imageViewArray = self.dealerCardsImageViews
-        case "Player":
-            playerContainerView = self.playerCardView
-            imageViewArray = self.playerCardsImageViews
-        case "AI":
-            playerContainerView = self.aiCardView
-            imageViewArray = self.aiCardsImageViews
-        default:
-            playerContainerView = self.aiCardView
-            imageViewArray = self.aiCardsImageViews
-            
-        }
-        var playerHand = player.hand
-        var cardHeight = CGFloat(150)
-        var cardWidth = CGFloat(105)
-        var cardX:CGFloat
-        var cardY:CGFloat
-        var addCard:Card
-        var name:String
-        
-        cardY = playerContainerView.frame.minY
-        var cardView:UIImageView
-        while imageViewArray.count < playerHand.count{
-            if imageViewArray.isEmpty{
-                cardX = playerContainerView.frame.minX
-                if player.player_name == "Dealer" && playerHand.count == 2 && !bj.dealer.gameover{
-                    name = "card-back"
-                }
-                else{
-                    addCard = playerHand[0]
-                    name = "\(addCard.name)_of_\(addCard.suit)"
-                }
-            }
-            else{
-                cardX = imageViewArray.last!.frame.maxX
-                addCard = playerHand[imageViewArray.count]
-                name = "\(addCard.name)_of_\(addCard.suit)"
-            }
-            cardView = UIImageView(frame: CGRectMake(cardX,cardY, cardWidth,cardHeight))
-            cardView.image = UIImage(named:name)
-        
-            cardView.contentMode = UIViewContentMode.ScaleAspectFill
-            imageViewArray.append(cardView)
-            view.addSubview(cardView)
-        }
-    }
-
-
     func gameOver(){
         activePlayerIndex=0
-        placeBetButton.setTitle("Play Again", forState: UIControlState.Normal)
-
-        placeBetButton.hidden = false
         ResetButton.hidden = false
-        for (index,player) in enumerate(bj.players){
-            playerBets[index].userInteractionEnabled=true
-        }
-        
-        
+        playAgainButton.hidden = false
     }
 
+    @IBAction func playAgain(sender: AnyObject) {
+        playAgainButton.hidden = true
+        startButton.hidden = false
+        changeBetButton.hidden  = false
+    }
+    
+    @IBAction func startNewGame(sender: AnyObject) {
+        bj.newGame()
+    }
+    
+    
+    
 //    @IBAction func resetGame(sender: AnyObject) {
 //        placeBetButton.hidden = true
 //        bj = bjModel()

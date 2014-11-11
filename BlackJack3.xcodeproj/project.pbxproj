@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F29A9461A1244740071DFA3 /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F29A9451A1244740071DFA3 /* Firebase.framework */; };
 		1F6C2B2F1A10C7DF0060A5F0 /* GamePropertiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6C2B2E1A10C7DF0060A5F0 /* GamePropertiesViewController.swift */; };
 		1F8857781A0185D6003747EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8857771A0185D6003747EF /* AppDelegate.swift */; };
 		1F88577B1A0185D6003747EF /* BlackJack3.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1F8857791A0185D6003747EF /* BlackJack3.xcdatamodeld */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1F29A9451A1244740071DFA3 /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Firebase.framework; sourceTree = "<group>"; };
 		1F6C2B2E1A10C7DF0060A5F0 /* GamePropertiesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamePropertiesViewController.swift; sourceTree = "<group>"; };
 		1F8857721A0185D6003747EF /* BlackJack3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlackJack3.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F8857761A0185D6003747EF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -64,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F29A9461A1244740071DFA3 /* Firebase.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,6 +83,7 @@
 		1F8857691A0185D6003747EF = {
 			isa = PBXGroup;
 			children = (
+				1F29A9451A1244740071DFA3 /* Firebase.framework */,
 				1F8857A81A018F0B003747EF /* CardImages.xcassets */,
 				1F8857741A0185D6003747EF /* BlackJack3 */,
 				1F88578D1A0185D6003747EF /* BlackJack3Tests */,
@@ -375,6 +379,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = BlackJack3/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -386,6 +394,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = BlackJack3/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
